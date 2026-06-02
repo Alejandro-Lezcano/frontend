@@ -1,0 +1,46 @@
+*{
+    margin: 0%
+}
+
+.capa-izquierda{
+    width: 30%;
+    height: 200px;
+    background-color: rgba(246, 255, 0, 0.5);
+    margin-top: 50px;
+    margin-left: 200px;
+    box-shadow: 5px 10px 5px rgb(67, 66, 58);
+    border-radius: 10px;
+    position:absolute;
+}
+
+.capa-derecha{
+    width: 30%;
+    height: 200px;
+    background-color: rgba(251, 9, 9, 0.5);
+    margin-top: 150px;
+    margin-left: 400px;
+    box-shadow: 5px 10px 5px rgb(4, 35, 29);
+    border-radius: 10px;
+    position:absolute;
+}
+
+.resaltar-capa:hover{
+    z-index: 10;
+    transform: scale(1.5);
+}
+
+.capa-emoji{
+    width: 150px;
+    height: 50px;
+    background-color: rgba(26, 223, 8, 0.5);
+    margin-top: 350px;
+    margin-left: -100px;
+    border-radius: 0px 15px 15px 0px;
+    text-align: right;
+    font-size: 25pt;
+    position:absolute;
+}
+
+.capa-emoji:hover{
+    margin-left: 0px;
+}
