@@ -1,0 +1,29 @@
+#clientes{
+    width: 90%;
+    border-collapse: collapse;
+    border: solid 2px #404040;
+}
+#clientes td{
+    border: solid 1px #cbc8c89b;
+}
+
+.center{
+    text-align: center;
+}
+
+.right{
+    text-align: right;
+}
+
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    border:solid 1px black;
+}
+.table td{
+    border: solid 1px green;
+}
+
+.resaltado-total{
+    background-color: #cdcdcd;
+}
