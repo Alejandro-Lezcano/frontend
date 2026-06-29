@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-widht, initial-scale=1.0"/>
+        <title>Mi Emprendimiento</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+        <style>
+            body{
+                background-color: #f0f0f0;
+            }
+            .navbar{
+                background-color: #da0101;
+            }
+            .btn-outline-success{
+                background-color: #f5f0e6;
+                border-color: #1C1C1C;
+            }
+            .btn-primary{
+                background-color: #1C1C1C;
+                border-color: #f5f0e6;
+            }
+            h1, h2, h3, h4{
+                color: #C9A24B
+            }
+        </style>
+
+    </head>
+    <body>
+        <header id="inicio">
+            <nav class="navbar navbar-expand-lg bg-white">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">KB's</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active bg-white" aria-current="page" href="#">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Marcas</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Género
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Damas</a></li>
+                                    <li><a class="dropdown-item" href="#">Caballeros</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Exóticos</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" aria-disabled="true">Set de perfumes</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="" aria-label=""/>
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <section class="container text-center py-5">
+                <h1 class="display-5 fw-bold">Kambler Blour's</h1>
+                <p class="lead">El perfume es la forma más intensa del recuerdo</p>
+                <a href="producto" class="btn btn-primary btn-lg btn-hover">Ver productos</a>
+        </header>
+
+        <section id="galeria" class="container py-5">
+            <h2 class="text-center mb-4">Galeria</h2>
+
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active d-block w-100">
+                        <img src="img/perfume1.webp" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/perfume2.webp" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/perfume3.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+
+        </section>
+
+        <section id="producto" class="container py-5">
+            <h3 class="text-center mb-4">Nuestro perfumes</h3>
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="img/perfume6.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Good Girl Jasmine Absolute 80ml Dama de Carolina Herrera</h5>
+                            <p class="card-text">Presentación Eau de Parfum ABSOLUTE excelente para invierno y otoño en uso nocturno con toque caranelizado, mandarina y jazmin.<br><br> Precio:680.000Gs.</p>
+                            <a href="#" class="btn btn-primary">Ver producto</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="img/perfume4.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">9PM 100ml Caballero de Afnan</h5>
+                            <p class="card-text">Presentación Eau de Parfum exclusivo en épocas de frio con uso nocturno por el toque Avainillado Manzana.<br><br> Precio:185.000Gs.</p>
+                            <a href="#" class="btn btn-primary">Ver producto</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="img/perfume5.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Acqua di Giò Profondo EDP 100ml Caballero de Giorgio Armani</h5>
+                            <p class="card-text">Perfecto para los dias cálidos por su Nota Marina en presentación Eau de Parfum.<br><br> Precio:670.000Gs.</p>
+                            <a href="#" class="btn btn-primary">Ver producto</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contacto" class="container py-5">
+            <h4 class=""text-center mb-4>Contactanos</h4>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputName" class="form-label">Nombre y Apellido</label>
+                            <input type="text" class="form-control" id="exampleInputName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Añade tu correo</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">No compartiremos tu correo con terceros</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Visualizar</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-white" text-light py-4 mt-5>
+            <div class="container text-center">
+                <ul class="nav justify-content-center border-botton pb-3 mb-3">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link px-2">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link px-2">Marcas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link px-2">Locales</a>
+                    </li>
+                </ul>
+                <p class="text-center">2026, Kambler Blour's</p>
+                <p class="mb-0">Sitio desarrollado por: Alejandro Lezcano Ozuna</p>
+            </div>
+        </footer>
+
+        <script src="js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
