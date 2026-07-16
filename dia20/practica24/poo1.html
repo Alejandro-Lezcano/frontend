@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <!--Plano Orientado a Objeto--> 
+    <script>
+        // PascalCase //
+        class Persona{
+            #nombre = "";
+            constructor(nombre){
+                this.#nombre = nombre;
+            }
+            mostrarDatos(){
+                return this.#nombre;
+            }
+            cambiarNombre(n){
+                if(n != ""){
+                    this.#nombre = n;
+                }
+            }
+        }
+
+        class Alumno extends Persona{
+            constructor(nombre, matricula){
+                super(nombre);
+                this.matricula = matricula;
+            }
+            mostrarDatos(){
+                return super.mostrarDatos() + ", matricula: " + this.matricula;
+            }
+        }
+    </script>
+        <h1>Prueba de POO en JavaScript</h1>
+    <script>
+        alumno1 = new Alumno("Ale", "M-001");
+        alumno1.cambiarNombre("Anabel");
+        alumno1.cambiarNombre("");
+        document.write("Datos del alumno: " + alumno1.mostrarDatos());
+    </script>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Práctica 5 - Formulario</title>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
+        <h1>Formulario de Contacto</h1>
+        <form id="formulario">
+            <label for="nombre">Nombre: </label>
+            <input type="text" id="nombre" required>
+
+            <label for="correo">Correo: </label>
+            <input type="email" id="correo" required>
+
+            <label for="mensaje-texto">Mensaje: </label>
+            <textarea id="mensaje-texto" rows="3"></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
+        <p id="mensaje"></p> 
+    </body>
+    <script src="script.js"></script>
+</html>

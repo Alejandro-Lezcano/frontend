@@ -1,0 +1,55 @@
+<html>
+    <script>
+        class Calculadora{
+            #num1;#num2;#resultado
+            constructor(){
+                this.#num1 = 0;
+                this.#num2 = 0;
+                this.#resultado = 0;
+            }
+            cargarNumeros(x, y){
+                this.#num1 = x;
+                this.#num2 = y;
+            }
+            sumar(){
+                this.#resultado = this.#num1 + this.#num2;
+                return this.#resultado;
+            }
+            resta(){
+                this.#resultado = this.#num1 - this.#num2;
+                return this.#resultado;
+            }
+            multiplicacion(){
+                this.#resultado = this.#num1 * this.#num2;
+                return this.#resultado;
+            }
+            division(){
+                this.#resultado = this.#num1 / this.#num2;
+                return this.#resultado;
+            }
+        }
+    </script>
+    <h1>Calculadora básica POO en JavaScript</h1>
+    <script>
+        casio = new Calculadora();
+        casio.cargarNumeros(45,7);
+        document.write("La suma es: " + casio.sumar());
+        casio.cargarNumeros(10,2);
+        document.write("<br> La suma es: " + casio.sumar());
+
+        casio.cargarNumeros(15,3);
+        document.write("<br> La resta es: " + casio.resta());
+        casio.cargarNumeros(20,5);
+        document.write("<br> La resta es: " + casio.resta());
+
+        casio.cargarNumeros(6,2);
+        document.write("<br> La multiplicación es: " + casio.multiplicacion());
+        casio.cargarNumeros(5,2);
+        document.write("<br> La multiplicación es: " + casio.multiplicacion());
+
+        casio.cargarNumeros(12,6);
+        document.write("<br> La división es: " + casio.division());
+        casio.cargarNumeros(55,5);
+        document.write("<br> La división es: " + casio.division());
+    </script>
+</html>

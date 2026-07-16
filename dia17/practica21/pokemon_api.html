@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>PokeDex</title>
+        <style>
+            body{
+                font-family: Arial, sans-serif;
+                padding:20px;
+            }
+            img{
+                width:150px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Información de ...</h1>
+        <div id="info">
+            <p>Cargando...</p>
+        </div>
+        <script>
+            const apiURL = 'https://pokeapi.co/api/v2/pokemon/raichu';
+
+            fetch(apiURL)
+            .then(response => {
+            if(!response.ok) throw new Error('Error al obtener los datos');
+                return response.json();
+            })
+            .then(data => {
+                const infoDiv = document.getElementById('info');
+                const nombre = data.name;
+                const id = data.id;
+                const altura = data.height;
+                const peso = data.weight;
+                const imagen = data.sprites.front_default;
+                const tipos = data.types.map(t => t.type.name).join(', ');
+                infoDiv.innerHTML = `
+                <p><strong>ID</strong>${id}</p>
+                <p><strong>Nombre</strong>${nombre}</p>
+                <p><strong>Altura</strong>${altura * 10}</p>
+                <p><strong>Peso</strong>${peso / 10}</p>
+                <p><strong>Tipo(s)</strong>${tipos}</p>
+                <img src="${imagen}" alt="${nombre}">
+                `;
+                })
+                .cacth(error => {
+                    document.getElementById('info').innerTHML = `<p>Error: ${error.message}</p>`;
+                });
+        </script>
+    </body>
+</html>

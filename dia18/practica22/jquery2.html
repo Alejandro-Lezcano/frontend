@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PDF con jsPDF</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+        <script src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    </head>
+    <body>
+        <div id="content">
+            <h2>Introducción a jQuery</h2>
+            <p>Ejemplo de uso de jsPDF</p>
+        </div>
+        
+        <button id="btnGenerar">Generar PDF</button>
+
+        <script>
+            $(document).ready(function(){
+                $("#btnGenerar").on("click", function(){
+                    const { jsPDF } = window.jspdf;
+
+                    // A4, vertical, en milímetros por defecto
+                    const doc = new jsPDF();
+
+                    doc.html(document.getElementById("content"), {
+                        x: 15,
+                        y: 15,
+                        width: 170, // Ajustado para que ocupe un buen ancho en la página (170mm)
+                        windowWidth: 718, // Resolución a la que simulará la pantalla
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
