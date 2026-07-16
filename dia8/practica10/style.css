@@ -1,0 +1,45 @@
+body {
+  font-family: sans-serif;
+  background: #0d0014;
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+
+header {
+  background: #1a0a2e;
+  padding: 20px;
+}
+
+.portada {
+  background-image: url('images/fondo.jfif');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#contador {
+  background: rgba(0,0,0,0.6);
+  padding: 16px 28px;
+  border-radius: 8px;
+  font-size: 22px;
+}
+
+#videos {
+  padding: 30px;
+}
+
+#videos a {
+  color: #9b30f5;
+  display: block;
+  margin: 8px;
+}
+
+footer {
+  background: #1a0a2e;
+  padding: 16px;
+  color: #888;
+}
