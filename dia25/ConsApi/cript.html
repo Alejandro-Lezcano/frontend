@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Consumo de API-React / Criptomonedas</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    </head>
+    <body class="bg-gray-100 flex items-center justify-center">
+
+        <div id="root"></div>
+
+    </body>
+    <script type="text/babel">
+        function PrecioDeXe(){
+            const [precio, setPrecio] = React.useState(null);
+            const [cambio24h, setCambio24h] = React.useState(null);
+            const [actualizado, setActualizado] = React.useState(null);
+            const [cargando, setCargando] = React.useState(true);
+            const [error, setError] = React.useState(null);
+
+            async function obtenerPrecio(){
+                setCargando(true);
+                setError(null);
+                try{
+                    const url = "https://api.coingecko.com/api/v3/simple/price?ids=dexe&vs_currencies=usd&include_24hr_change=true&include_updated_at=true";
+                    const respuesta = await fetch(url);
+                    if (!respuesta.ok) throw new Error("No se pudo conectar con CoinGecko");
+                    const datos = await respuesta.json();
+                    setPrecio(datos.dexe.usd);
+                    setCambio24h(datos.dexe.usd_24h_change);
+                    setActualizado(datos.dexe.last_updated_at);
+                } catch(error){
+                    setError(error.message);
+                } finally{
+                    setCargando(false);
+                }
+            }
+
+            React.useEffect(() => {
+                obtenerPrecio();
+            }, []);
+
+            const subio = cambio24h !== null && cambio24h >= 0;
+
+            return (
+                <div class="bg-white p-8 shadow-sm border border-gray-100 w-450px relative">
+                    <div class="mb-6">
+                        <span class="uppercase text-gray-400 font-bold block mb-1">COINGECKO API</span>
+                        <h2 class="text-2xl font-extrabold text-slate-800">DeXe (DEXE)</h2>
+                    </div>
+
+                    <div class="absolute top-8 right-8 text-amber-500 text-3xl font-bold">
+                        ¤
+                    </div>
+
+                    {cargando && <p class="text-gray-500 my-4">Cargando precio...</p>}
+                    {error && <p class="text-red-500 my-4">Error: {error}</p>}
+
+                    {!cargando && !error && precio !== null && (
+                        <>
+                            <p class="text-44px font-extrabold text-slate-950 tracking-tight leading-none mb-2">
+                                {precio.toLocaleString("en-US", {style: "currency", currency: "USD"})}
+                            </p>
+                            
+                            <p class={`font-bold flex items-center mb-6`}>
+                                <span>{subio ? "🔼" : "🔽"}</span>
+                                {Math.abs(cambio24h).toFixed(2)}% (24 h)
+                            </p>
+                            
+                            <p class="text-[13px] text-gray-400 font-medium mb-6">
+                                Última actualización: {new Date(actualizado * 1000).toLocaleTimeString("es-PY")}
+                            </p>
+                        </>
+                    )}
+                    
+                    <button 
+                        onClick={obtenerPrecio} 
+                        disabled={cargando}
+                        class="w-full bg-[#0d1527] hover:bg-slate-800 text-white font-bold py-4 px-6 rounded-xl transition-colors"
+                    >
+                        {cargando ? "Actualizando..." : "Actualizar"}
+                    </button>
+                </div>
+            );
+        };
+        
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<PrecioDeXe />);
+    </script>
+</html>
