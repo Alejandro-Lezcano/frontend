@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tienda Online</title>
+        <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script>
+            // Configuración rápida de Tailwind CDN para los colores corporativos
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: { primary: '#121216', secondary: '#C1A478' },
+                        fontFamily: { premium: ['"Bodoni Moda"', 'serif'] }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="bg-[#F9F9FB]">
+        <header class="sticky top-0 z-50 w-full bg-primary text-white font-premium border-b-2 border-secondary px-6 py-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-5">
+        
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center gap-3 no-underline text-white">
+                        <img src="images/VersaStyleLOGO.png" alt="" class="h-11 w-auto object-contain rounded">
+                        <span class="text-xl font-bold tracking-wider hidden sm:block">
+                            VersaStyle<span class="text-secondary">PY</span>
+                        </span>
+                    </a>
+                </div>
+
+                <div class="flex-1 max-w-lg hidden md:block">
+                    <form id="search-form" action="/buscar" method="GET" class="flex bg-white rounded overflow-hidden">
+                        <input type="text" id="search-input" name="q" placeholder="Buscar prendas, marcas, calzados..." autocomplete="off" class="w-full px-4 py-2 text-sm text-primary outline-none">
+                        <button type="submit" class="bg-secondary text-primary px-4 flex items-center justify-center transition-colors duration-300 hover:bg-[#b09367]">
+                            <span class="material-icons-outlined">search</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <button id="register-btn" class="flex items-center gap-2 text-sm bg-transparent border-none text-white cursor-pointer transition-colors duration-300 hover:text-secondary font-premium">
+                        <span class="material-icons-outlined text-xl">person</span>
+                        <span class="hidden lg:inline">Registrate / Mi Cuenta</span>
+                    </button>
+
+                    <div class="relative">
+                        <button id="cart-toggle-btn" class="flex items-center gap-2 bg-transparent border-none text-white cursor-pointer relative transition-colors duration-300 hover:text-secondary" aria-label="Ver Carrito">
+                            <span class="material-icons-outlined text-2xl">shopping_bag</span>
+                            <span id="cart-counter" class="absolute -top-2 -right-2 bg-secondary text-primary text-xs font-bold rounded-full px-1.5 py-0.5 min-w-[18px] text-center">0</span>
+                        </button>
+                
+                        <div id="mini-cart-dropdown" class="hidden absolute right-0 top-10 bg-white text-primary w-80 shadow-2xl rounded border border-gray-200 flex-col z-50">
+                            
+                            <div id="mini-cart-items" class="max-h-60 overflow-y-auto p-4">
+                                <p class="text-center text-gray-500 text-sm">Tu carrito está vacío.</p>
+                            </div>
+                    
+                            <div class="p-4 border-t border-gray-100 bg-gray-50">
+                                <div class="flex justify-between text-gray-600 text-xs mb-1 font-sans">
+                                    <span>Subtotal:</span>
+                                    <span id="mini-cart-subtotal" class="font-semibold">0 Gs.</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600 text-xs mb-3 font-sans">
+                                    <span>Envío:</span>
+                                    <span id="mini-cart-envio" class="font-semibold">0 Gs.</span>
+                                </div>
+                                <div class="flex justify-between font-bold mb-3 text-sm border-t border-gray-200 pt-2">
+                                    <span>Total:</span>
+                                    <span id="mini-cart-total">0 Gs.</span>
+                                </div>
+                                <a href="/carrito" class="block w-full text-center py-2 mb-2 rounded text-sm font-semibold border border-primary text-primary bg-transparent no-underline transition-all duration-300 hover:bg-gray-100">Ver Carrito Completo</a>
+                                <button class="block w-full text-center py-2 rounded text-sm font-semibold bg-primary text-white border-none cursor-pointer transition-all duration-300 hover:bg-secondary hover:text-primary">Finalizar Compra</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <nav class="w-full bg-[#1b1b21] text-white font-premium border-b border-gray-800 tracking-wide relative">
+                <div class="max-w-7xl mx-auto flex items-center h-12 px-5">
+                    <ul class="flex items-center space-x-8 text-sm font-medium h-full m-0 p-0 list-none">
+                        <li class="h-full flex items-center border-b-2 border-transparent transition-all duration-300 hover:border-secondary">
+                            <a href="/hombre" class="no-underline text-white hover:text-secondary transition-colors">Hombre</a>
+                        </li>
+                        <li class="h-full flex items-center border-b-2 border-transparent transition-all duration-300 hover:border-secondary">
+                            <a href="/mujer" class="no-underline text-white hover:text-secondary transition-colors">Mujer</a>
+                        </li>
+                        <li class="h-full flex items-center border-b-2 border-transparent transition-all duration-300 hover:border-secondary">
+                            <a href="/marcas" class="no-underline text-white hover:text-secondary transition-colors font-semibold tracking-widest text-xs uppercase">Marcas</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <section class="w-full py-16 px-6 font-premium">
+                <div class="max-w-7xl mx-auto">
+                    
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold text-primary tracking-wide uppercase">Colección Exclusiva</h2>
+                        <div class="w-20 h-0.5 bg-secondary mx-auto mt-3"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
+                        <div class="bg-white rounded shadow-md border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[450px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop" 
+                                     alt="Vestido Premium" 
+                                     class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-6 flex flex-col flex-grow">
+                                <span class="text-xs uppercase tracking-widest text-gray-400 mb-1">Mujer</span>
+                                <h3 class="text-xl font-bold text-primary mb-2">Vestido Premium "Elegance"</h3>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4 flex-grow">
+                                    Diseñado con líneas finas y un entalle perfecto que resalta la figura con sofisticación. Ideal para eventos exclusivos y cócteles de gala.
+                                </p>
+                                <div class="flex items-center justify-between pt-4 border-t border-gray-100 min-h-[60px]">
+                                    <span class="text-lg font-bold text-primary">450.000 Gs.</span>
+                                    <div id="btn-container-1" data-name="Vestido Premium Elegance" data-price="450000" data-size="large" class="w-1/2">
+                                        <button onclick="addItemToCart(1, 'Vestido Premium Elegance', 450000)" 
+                                                class="w-full bg-primary text-white text-xs uppercase tracking-wider font-semibold px-4 py-2.5 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar al Carrito
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded shadow-md border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[450px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=600&auto=format&fit=crop" 
+                                     alt="Saco Slim Fit" 
+                                     class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-6 flex flex-col flex-grow">
+                                <span class="text-xs uppercase tracking-widest text-gray-400 mb-1">Hombre</span>
+                                <h3 class="text-xl font-bold text-primary mb-2">Saco Slim Fit "Dandy"</h3>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4 flex-grow">
+                                    Confección de alta sastrería con textiles importados. Un corte moderno y estructurado que redefine la elegancia masculina contemporánea.
+                                </p>
+                                <div class="flex items-center justify-between pt-4 border-t border-gray-100 min-h-[60px]">
+                                    <span class="text-lg font-bold text-primary">680.000 Gs.</span>
+                                    <div id="btn-container-2" data-name="Saco Slim Fit Dandy" data-price="680000" data-size="large" class="w-1/2">
+                                        <button onclick="addItemToCart(2, 'Saco Slim Fit Dandy', 680000)" 
+                                                class="w-full bg-primary text-white text-xs uppercase tracking-wider font-semibold px-4 py-2.5 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar al Carrito
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded shadow-md border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[450px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=600&auto=format&fit=crop" 
+                                     alt="Sombrero Versa" 
+                                     class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-6 flex flex-col flex-grow">
+                                <span class="text-xs uppercase tracking-widest text-gray-400 mb-1">Accesorios</span>
+                                <h3 class="text-xl font-bold text-primary mb-2">Sombrero "Versa Fedora"</h3>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4 flex-grow">
+                                    Inspirado en la silueta clásica de nuestro logotipo. Hecho a mano con acabados premium y detalles dorados que completan cualquier atuendo distinguido.
+                                </p>
+                                <div class="flex items-center justify-between pt-4 border-t border-gray-100 min-h-[60px]">
+                                    <span class="text-lg font-bold text-primary">320.000 Gs.</span>
+                                    <div id="btn-container-3" data-name="Sombrero Versa Fedora" data-price="320000" data-size="large" class="w-1/2">
+                                        <button onclick="addItemToCart(3, 'Sombrero Versa Fedora', 320000)" 
+                                                class="w-full bg-primary text-white text-xs uppercase tracking-wider font-semibold px-4 py-2.5 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar al Carrito
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mb-12">
+                        <h2 class="text-2xl md:text-3xl font-bold text-primary tracking-wide uppercase">Prendas Esenciales</h2>
+                        <div class="w-16 h-0.5 bg-secondary mx-auto mt-3"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                        <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[300px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=500&auto=format&fit=crop" alt="Camisa Lino" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Hombre</span>
+                                <h4 class="text-base font-bold text-primary mb-1.5 truncate">Camisa de Lino Premium</h4>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-4">Lino importado de máxima frescura.</p>
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto min-h-[50px]">
+                                    <span class="text-sm font-bold text-primary">280.000 Gs.</span>
+                                    <div id="btn-container-4" data-name="Camisa de Lino Premium" data-price="280000" data-size="small" class="w-1/2">
+                                        <button onclick="addItemToCart(4, 'Camisa de Lino Premium', 280000)" class="w-full bg-primary text-white text-[10px] uppercase tracking-wider font-semibold px-3 py-2 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[300px] overflow-hidden bg-gray-200">
+                                <img src="images/f6a1915787dc04f8485af273ea83afaa.jpg" alt="Blusa Satinada" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Mujer</span>
+                                <h4 class="text-base font-bold text-primary mb-1.5 truncate">Blusa Satinada Versa</h4>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-4">Textura suave con caída fluida.</p>
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto min-h-[50px]">
+                                    <span class="text-sm font-bold text-primary">240.000 Gs.</span>
+                                    <div id="btn-container-5" data-name="Blusa Satinada Versa" data-price="240000" data-size="small" class="w-1/2">
+                                        <button onclick="addItemToCart(5, 'Blusa Satinada Versa', 240000)" class="w-full bg-primary text-white text-[10px] uppercase tracking-wider font-semibold px-3 py-2 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[300px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=500&auto=format&fit=crop" alt="Pantalón Chino" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Hombre</span>
+                                <h4 class="text-base font-bold text-primary mb-1.5 truncate">Pantalón Chino Tailored</h4>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-4">Algodón elástico de ajuste semi-entallado.</p>
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto min-h-[50px]">
+                                    <span class="text-sm font-bold text-primary">350.000 Gs.</span>
+                                    <div id="btn-container-6" data-name="Pantalón Chino Tailored" data-price="350000" data-size="small" class="w-1/2">
+                                        <button onclick="addItemToCart(6, 'Pantalón Chino Tailored', 350000)" class="w-full bg-primary text-white text-[10px] uppercase tracking-wider font-semibold px-3 py-2 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[300px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=500&auto=format&fit=crop" alt="Jeans High" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Mujer</span>
+                                <h4 class="text-base font-bold text-primary mb-1.5 truncate">Jeans High Waist Sculpt</h4>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-4">Mezclilla premium de tiro alto.</p>
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto min-h-[50px]">
+                                    <span class="text-sm font-bold text-primary">290.000 Gs.</span>
+                                    <div id="btn-container-7" data-name="Jeans High Waist Sculpt" data-price="290000" data-size="small" class="w-1/2">
+                                        <button onclick="addItemToCart(7, 'Jeans High Waist Sculpt', 290000)" class="w-full bg-primary text-white text-[10px] uppercase tracking-wider font-semibold px-3 py-2 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[300px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=500&auto=format&fit=crop" alt="Campera Cuero" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Hombre</span>
+                                <h4 class="text-base font-bold text-primary mb-1.5 truncate">Campera Eco-Cuero Biker</h4>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-4">Detalles en metal pulido.</p>
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto min-h-[50px]">
+                                    <span class="text-sm font-bold text-primary">580.000 Gs.</span>
+                                    <div id="btn-container-8" data-name="Campera Eco-Cuero Biker" data-price="580000" data-size="small" class="w-1/2">
+                                        <button onclick="addItemToCart(8, 'Campera Eco-Cuero Biker', 580000)" class="w-full bg-primary text-white text-[10px] uppercase tracking-wider font-semibold px-3 py-2 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[300px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=500&auto=format&fit=crop" alt="Blazer Sastrero" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Mujer</span>
+                                <h4 class="text-base font-bold text-primary mb-1.5 truncate">Blazer Cruzado Sastrería</h4>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-4">Estructura impecable con botones dorados.</p>
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto min-h-[50px]">
+                                    <span class="text-sm font-bold text-primary">490.000 Gs.</span>
+                                    <div id="btn-container-9" data-name="Blazer Cruzado Sastrería" data-price="490000" data-size="small" class="w-1/2">
+                                        <button onclick="addItemToCart(9, 'Blazer Cruzado Sastrería', 490000)" class="w-full bg-primary text-white text-[10px] uppercase tracking-wider font-semibold px-3 py-2 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[300px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1614975058789-41316d0e2e9c?q=80&w=500&auto=format&fit=crop" alt="Sweater Hilo" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Hombre</span>
+                                <h4 class="text-base font-bold text-primary mb-1.5 truncate">Sweater de Hilo Liviano</h4>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-4">Tejido suave, ideal para media estación.</p>
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto min-h-[50px]">
+                                    <span class="text-sm font-bold text-primary">310.000 Gs.</span>
+                                    <div id="btn-container-10" data-name="Sweater de Hilo Liviano" data-price="310000" data-size="small" class="w-1/2">
+                                        <button onclick="addItemToCart(10, 'Sweater de Hilo Liviano', 310000)" class="w-full bg-primary text-white text-[10px] uppercase tracking-wider font-semibold px-3 py-2 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[300px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?q=80&w=500&auto=format&fit=crop" alt="Falda Midi" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Mujer</span>
+                                <h4 class="text-base font-bold text-primary mb-1.5 truncate">Falda Midi Plisada</h4>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-4">Movimiento elegante y sutil.</p>
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto min-h-[50px]">
+                                    <span class="text-sm font-bold text-primary">270.000 Gs.</span>
+                                    <div id="btn-container-11" data-name="Falda Midi Plisada" data-price="270000" data-size="small" class="w-1/2">
+                                        <button onclick="addItemToCart(11, 'Falda Midi Plisada', 270000)" class="w-full bg-primary text-white text-[10px] uppercase tracking-wider font-semibold px-3 py-2 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                            <div class="w-full h-[300px] overflow-hidden bg-gray-200">
+                                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500&auto=format&fit=crop" alt="Remera Pima" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-1">Hombre</span>
+                                <h4 class="text-base font-bold text-primary mb-1.5 truncate">Remera Algodón Pima</h4>
+                                <p class="text-xs text-gray-500 line-clamp-2 mb-4">Confort extraordinario en algodón.</p>
+                                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto min-h-[50px]">
+                                    <span class="text-sm font-bold text-primary">150.000 Gs.</span>
+                                    <div id="btn-container-12" data-name="Remera Algodón Pima" data-price="150000" data-size="small" class="w-1/2">
+                                        <button onclick="addItemToCart(12, 'Remera Algodón Pima', 150000)" class="w-full bg-primary text-white text-[10px] uppercase tracking-wider font-semibold px-3 py-2 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <footer class="w-full bg-[#121216] text-gray-300 font-premium border-t border-[#C1A478]/30 pt-16 pb-8 px-6">
+                <div class="max-w-7xl mx-auto">
+            
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-gray-800">
+                
+                        <div class="space-y-5">
+                            <div class="flex items-center gap-3">
+                                <img src="images/VersaStyleLOGO.png" alt="VersaStyle Logo" class="h-10 w-auto object-contain rounded">
+                                <span class="text-xl font-bold tracking-wider text-white">
+                                    VersaStyle<span class="text-[#C1A478]">PY</span>
+                                </span>
+                            </div>
+                            <p class="text-sm text-gray-400 leading-relaxed font-sans">
+                                Definiendo la moda contemporánea en Paraguay con diseños premium, sofisticados y pensados para destacar en cada ocasión.
+                            </p>
+                            <div class="flex items-center gap-4 pt-2">
+                                <a href="https://instagram.com/versastylepy" target="_blank" rel="noopener noreferrer" 
+                                    class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-[#C1A478] hover:border-[#C1A478] transition-all duration-300">
+                                    <i class="fab fa-instagram text-lg"></i>
+                                </a>
+                                <a href="https://facebook.com/versastylepy" target="_blank" rel="noopener noreferrer" 
+                                    class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-[#C1A478] hover:border-[#C1A478] transition-all duration-300">
+                                    <i class="fab fa-facebook-f text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6 border-b border-[#C1A478] pb-2 inline-block">Navegación</h4>
+                            <ul class="space-y-3 p-0 m-0 list-none text-sm font-sans">
+                                <li><button id="footer-home-btn" class="hover:text-[#C1A478] text-gray-400 border-none bg-transparent cursor-pointer p-0 text-left transition-colors font-sans">Inicio</button></li>
+                                <li><a href="/mujer" class="hover:text-[#C1A478] text-gray-400 no-underline transition-colors">Colección Mujer</a></li>
+                                <li><a href="/hombre" class="hover:text-[#C1A478] text-gray-400 no-underline transition-colors">Colección Hombre</a></li>
+                                <li><a href="/marcas" class="hover:text-[#C1A478] text-gray-400 no-underline transition-colors">Nuestras Marcas</a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6 border-b border-[#C1A478] pb-2 inline-block">Soporte</h4>
+                            <ul class="space-y-3 p-0 m-0 list-none text-sm font-sans">
+                                <li><a href="/preguntas-frecuentes" class="hover:text-[#C1A478] text-gray-400 no-underline transition-colors">Preguntas Frecuentes</a></li>
+                                <li><a href="/politicas-envio" class="hover:text-[#C1A478] text-gray-400 no-underline transition-colors">Políticas de Envío</a></li>
+                                <li><a href="/cambios-devoluciones" class="hover:text-[#C1A478] text-gray-400 no-underline transition-colors">Cambios y Devoluciones</a></li>
+                                <li><a href="/terminos-condiciones" class="hover:text-[#C1A478] text-gray-400 no-underline transition-colors">Términos y Condiciones</a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6 border-b border-[#C1A478] pb-2 inline-block">Contacto</h4>
+                            <ul class="space-y-4 p-0 m-0 list-none text-sm font-sans">
+                                <li class="flex items-start gap-3">
+                                    <span class="material-icons-outlined text-[#C1A478] mt-0.5">mail</span>
+                                    <div>
+                                        <span class="block text-xs text-gray-500 font-bold uppercase">Escríbenos</span>
+                                        <a href="mailto:soporte@versastylepy.gmail.com" class="text-gray-300 hover:text-[#C1A478] transition-colors no-underline">
+                                            versastylepy@gmail.com
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="material-icons-outlined text-[#C1A478] mt-0.5">location_on</span>
+                                    <div>
+                                        <span class="block text-xs text-gray-500 font-bold uppercase">Showroom</span>
+                                        <span class="text-gray-400">Asunción, Paraguay</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-sans">
+                        <p>&copy; 2026 VersaStyle PY. Todos los derechos reservados. Diseñado bajo estándares de alta costura.</p>
+                
+                        <div class="flex items-center gap-4 text-lg">
+                            <i class="fab fa-cc-visa hover:text-white transition-colors" title="Visa"></i>
+                            <i class="fab fa-cc-mastercard hover:text-white transition-colors" title="Mastercard"></i>
+                            <i class="fa-solid fa-money-bill-transfer hover:text-white transition-colors" title="Transferencia Bancaria / Giros"></i>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <div id="register-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-lg shadow-2xl w-full max-w-md overflow-hidden transform scale-95 transition-all duration-300 border border-secondary/20">
+                
+                <div class="bg-primary text-white px-6 py-4 flex items-center justify-between border-b border-secondary">
+                    <h3 class="font-premium text-lg font-bold tracking-wide">Crear Cuenta Premium</h3>
+                    <button id="close-modal-btn" class="bg-transparent border-none text-gray-400 hover:text-secondary cursor-pointer flex items-center">
+                        <span class="material-icons-outlined text-2xl">close</span>
+                    </button>
+                </div>
+
+                <form id="register-form" class="p-6 space-y-4 font-sans text-sm text-primary">
+                    <p class="text-xs text-gray-500 mb-2">* Campos obligatorios</p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Nombre *</label>
+                            <input type="text" id="reg-name" required placeholder="Ej. Carlos" class="w-full px-3 py-2 border border-gray-300 rounded focus:border-secondary focus:outline-none bg-gray-50">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Apellido *</label>
+                            <input type="text" id="reg-surname" required placeholder="Ej. González" class="w-full px-3 py-2 border border-gray-300 rounded focus:border-secondary focus:outline-none bg-gray-50">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Número de Teléfono *</label>
+                        <input type="tel" id="reg-phone" required placeholder="Ej. 0981 123456" class="w-full px-3 py-2 border border-gray-300 rounded focus:border-secondary focus:outline-none bg-gray-50">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Correo Electrónico (Gmail) *</label>
+                        <input type="email" id="reg-email" required placeholder="carlos@gmail.com" class="w-full px-3 py-2 border border-gray-300 rounded focus:border-secondary focus:outline-none bg-gray-50">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Dirección de su Casa</label>
+                        <input type="text" id="reg-address" placeholder="Ej. Avda. España 1234, Asunción" class="w-full px-3 py-2 border border-gray-300 rounded focus:border-secondary focus:outline-none bg-gray-50">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Género</label>
+                        <select id="reg-gender" class="w-full px-3 py-2 border border-gray-300 rounded focus:border-secondary focus:outline-none bg-gray-50">
+                            <option value="">Selecciona tu género</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Otro">Otro / Prefiero no decirlo</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary text-white font-premium py-2.5 rounded border-none cursor-pointer text-sm font-semibold tracking-wider transition-all duration-300 hover:bg-secondary hover:text-primary mt-6">
+                        Registrarme
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                // Estado del carrito
+                let cart = [];
+                const COSTO_ENVIO = 20000; // 20.000 Gs. envío estándar
+
+                // Elementos de la interfaz
+                const cartToggleBtn = document.getElementById("cart-toggle-btn");
+                const miniCartDropdown = document.getElementById("mini-cart-dropdown");
+                const cartCounter = document.getElementById("cart-counter");
+                const miniCartItems = document.getElementById("mini-cart-items");
+                
+                // Resumen del modal
+                const miniCartSubtotal = document.getElementById("mini-cart-subtotal");
+                const miniCartEnvio = document.getElementById("mini-cart-envio");
+                const miniCartTotal = document.getElementById("mini-cart-total");
+
+                // Elementos del Modal de Registro
+                const registerBtn = document.getElementById("register-btn");
+                const registerModal = document.getElementById("register-modal");
+                const closeModalBtn = document.getElementById("close-modal-btn");
+                const registerForm = document.getElementById("register-form");
+
+                // Elemento del Botón "Inicio" en el Footer
+                const footerHomeBtn = document.getElementById("footer-home-btn");
+
+                // ==========================================
+                // 1. CONTROL DEL CARRITO
+                // ==========================================
+                if (cartToggleBtn && miniCartDropdown) {
+                    cartToggleBtn.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        const isHidden = miniCartDropdown.classList.contains("hidden");
+                        if (isHidden) {
+                            miniCartDropdown.classList.remove("hidden");
+                            miniCartDropdown.classList.add("flex");
+                        } else {
+                            miniCartDropdown.classList.add("hidden");
+                            miniCartDropdown.classList.remove("flex");
+                        }
+                    });
+                }
+
+                // Cerrar al clickear afuera del carrito o del modal
+                document.addEventListener("click", (e) => {
+                    if (miniCartDropdown && !miniCartDropdown.contains(e.target) && e.target !== cartToggleBtn) {
+                        miniCartDropdown.classList.add("hidden");
+                        miniCartDropdown.classList.remove("flex");
+                    }
+                    if (e.target === registerModal) {
+                        closeRegisterModal();
+                    }
+                });
+
+                // Actualizar interfaz del carrito (UI)
+                function updateCartUI() {
+                    if (!cartCounter || !miniCartItems) return;
+
+                    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+                    cartCounter.textContent = totalItems;
+
+                    miniCartItems.innerHTML = "";
+
+                    if (cart.length === 0) {
+                        miniCartItems.innerHTML = `<p class="text-center text-gray-400 text-sm py-8">Tu carrito está vacío.</p>`;
+                        if (miniCartSubtotal) miniCartSubtotal.textContent = "0 Gs.";
+                        if (miniCartEnvio) miniCartEnvio.textContent = "0 Gs.";
+                        if (miniCartTotal) miniCartTotal.textContent = "0 Gs.";
+                        resetAllCardButtons();
+                        return;
+                    }
+
+                    let subtotal = 0;
+
+                    cart.forEach(item => {
+                        subtotal += item.price * item.quantity;
+                        
+                        const itemHTML = `
+                            <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-3">
+                                <div class="flex-1 pr-2">
+                                    <p class="m-0 font-bold text-xs text-primary leading-tight truncate">${item.name}</p>
+                                    <p class="m-0 text-[11px] text-gray-500 mt-0.5">${item.price.toLocaleString('es-PY')} Gs. c/u</p>
+                                </div>
+                                
+                                <div class="flex items-center bg-gray-100 rounded border border-gray-200 mr-2">
+                                    <button class="decrease-qty-btn px-2 py-1 text-gray-600 hover:text-black font-bold text-xs cursor-pointer border-none bg-transparent" data-id="${item.id}">-</button>
+                                    <span class="px-2 text-xs font-semibold text-primary">${item.quantity}</span>
+                                    <button class="increase-qty-btn px-2 py-1 text-gray-600 hover:text-black font-bold text-xs cursor-pointer border-none bg-transparent" data-id="${item.id}">+</button>
+                                </div>
+
+                                <button class="remove-item-btn bg-transparent border-none text-red-400 cursor-pointer p-1 hover:text-red-600 transition-colors" data-id="${item.id}">
+                                    <span class="material-icons-outlined text-lg">delete</span>
+                                </button>
+                            </div>
+                        `;
+                        miniCartItems.insertAdjacentHTML("beforeend", itemHTML);
+                    });
+
+                    if (miniCartSubtotal) miniCartSubtotal.textContent = `${subtotal.toLocaleString('es-PY')} Gs.`;
+                    if (miniCartEnvio) miniCartEnvio.textContent = `${COSTO_ENVIO.toLocaleString('es-PY')} Gs.`;
+                    if (miniCartTotal) {
+                        const total = subtotal + COSTO_ENVIO;
+                        miniCartTotal.textContent = `${total.toLocaleString('es-PY')} Gs.`;
+                    }
+
+                    syncCardButtons();
+                    registerCartEvents();
+                }
+
+                // Agregar al carrito (Función global)
+                window.addItemToCart = function(id, name, price) {
+                    const existingItem = cart.find(item => item.id === id);
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({ id, name, price, quantity: 1 });
+                    }
+                    updateCartUI();
+
+                    if (miniCartDropdown) {
+                        miniCartDropdown.classList.remove("hidden");
+                        miniCartDropdown.classList.add("flex");
+                    }
+                };
+
+                // Restar unidades desde las tarjetas
+                window.decrementItemFromCard = function(id) {
+                    const product = cart.find(item => item.id === id);
+                    if (product) {
+                        product.quantity -= 1;
+                        if (product.quantity <= 0) {
+                            cart = cart.filter(item => item.id !== id);
+                        }
+                    }
+                    updateCartUI();
+                };
+
+                // Sincronizar botones normales de las tarjetas
+                function syncCardButtons() {
+                    cart.forEach(item => {
+                        const container = document.getElementById(`btn-container-${item.id}`);
+                        if (container) {
+                            container.innerHTML = `
+                                <div class="flex items-center justify-between bg-gray-100 border border-gray-300 rounded w-full overflow-hidden">
+                                    <button onclick="decrementItemFromCard(${item.id})" class="px-3 py-2 bg-gray-200 hover:bg-gray-300 text-primary font-bold text-sm cursor-pointer transition-colors border-none">-</button>
+                                    <span class="text-xs font-bold text-primary select-none">${item.quantity} un.</span>
+                                    <button onclick="addItemToCart(${item.id}, '${item.name}', ${item.price})" class="px-3 py-2 bg-gray-200 hover:bg-gray-300 text-primary font-bold text-sm cursor-pointer transition-colors border-none">+</button>
+                                </div>
+                            `;
+                        }
+                    });
+
+                    const cardContainers = document.querySelectorAll("[id^='btn-container-']");
+                    cardContainers.forEach(container => {
+                        const id = parseInt(container.id.replace("btn-container-", ""));
+                        const isInCart = cart.some(item => item.id === id);
+                        if (!isInCart) {
+                            resetCardButton(container, id);
+                        }
+                    });
+                }
+
+                function resetCardButton(container, id) {
+                    const productName = container.getAttribute("data-name");
+                    const productPrice = parseFloat(container.getAttribute("data-price"));
+                    const btnSize = container.getAttribute("data-size") || "large";
+
+                    if (btnSize === "large") {
+                        container.innerHTML = `
+                            <button onclick="addItemToCart(${id}, '${productName}', ${productPrice})" 
+                                    class="w-full bg-primary text-white text-xs uppercase tracking-wider font-semibold px-4 py-2.5 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                Agregar al Carrito
+                            </button>
+                        `;
+                    } else {
+                        container.innerHTML = `
+                            <button onclick="addItemToCart(${id}, '${productName}', ${productPrice})" class="w-full bg-primary text-white text-[10px] uppercase tracking-wider font-semibold px-3 py-2 rounded transition-all duration-300 hover:bg-secondary hover:text-primary cursor-pointer border-none">
+                                Agregar
+                            </button>
+                        `;
+                    }
+                }
+
+                function resetAllCardButtons() {
+                    const cardContainers = document.querySelectorAll("[id^='btn-container-']");
+                    cardContainers.forEach(container => {
+                        const id = parseInt(container.id.replace("btn-container-", ""));
+                        resetCardButton(container, id);
+                    });
+                }
+
+                function registerCartEvents() {
+                    miniCartItems.querySelectorAll(".increase-qty-btn").forEach(btn => {
+                        btn.addEventListener("click", (e) => {
+                            const productId = parseInt(e.currentTarget.getAttribute("data-id"));
+                            const product = cart.find(item => item.id === productId);
+                            if (product) product.quantity += 1;
+                            updateCartUI();
+                        });
+                    });
+
+                    miniCartItems.querySelectorAll(".decrease-qty-btn").forEach(btn => {
+                        btn.addEventListener("click", (e) => {
+                            const productId = parseInt(e.currentTarget.getAttribute("data-id"));
+                            const product = cart.find(item => item.id === productId);
+                            if (product) {
+                                product.quantity -= 1;
+                                if (product.quantity <= 0) {
+                                    cart = cart.filter(item => item.id !== productId);
+                                }
+                            }
+                            updateCartUI();
+                        });
+                    });
+
+                    miniCartItems.querySelectorAll(".remove-item-btn").forEach(btn => {
+                        btn.addEventListener("click", (e) => {
+                            const productId = parseInt(e.currentTarget.getAttribute("data-id"));
+                            cart = cart.filter(item => item.id !== productId);
+                            updateCartUI();
+                        });
+                    });
+                }
+
+                // ==========================================
+                // 2. MODAL DE REGISTRO
+                // ==========================================
+                function openRegisterModal() {
+                    if (registerModal) {
+                        registerModal.classList.remove("hidden");
+                        // Desactivar scroll de fondo
+                        document.body.style.overflow = "hidden";
+                    }
+                }
+
+                function closeRegisterModal() {
+                    if (registerModal) {
+                        registerModal.classList.add("hidden");
+                        // Activar de nuevo el scroll de fondo
+                        document.body.style.overflow = "auto";
+                    }
+                }
+
+                if (registerBtn) {
+                    registerBtn.addEventListener("click", openRegisterModal);
+                }
+
+                if (closeModalBtn) {
+                    closeModalBtn.addEventListener("click", closeRegisterModal);
+                }
+
+                if (registerForm) {
+                    registerForm.addEventListener("submit", (e) => {
+                        e.preventDefault(); // Previene la recarga del navegador
+
+                        // Captura de datos
+                        const name = document.getElementById("reg-name").value.trim();
+                        const surname = document.getElementById("reg-surname").value.trim();
+                        const phone = document.getElementById("reg-phone").value.trim();
+                        const email = document.getElementById("reg-email").value.trim();
+                        const address = document.getElementById("reg-address").value.trim();
+                        const gender = document.getElementById("reg-gender").value;
+
+                        // Mensaje de éxito
+                        alert(`¡Registro Exitoso, Bienvenido a VersaStyle PY!\n\nCliente: ${name} ${surname}\nTeléfono: ${phone}\nGmail: ${email}\nDirección: ${address || "No especificada"}\nGénero: ${gender || "No especificado"}`);
+                        
+                        // Limpiar formulario y cerrar modal
+                        registerForm.reset();
+                        closeRegisterModal();
+                    });
+                }
+
+                // ==========================================
+                // 3. DESPLAZAMIENTO SUAVE (BOTÓN INICIO FOOTER)
+                // ==========================================
+                if (footerHomeBtn) {
+                    footerHomeBtn.addEventListener("click", () => {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth" // Efecto de deslizamiento suave
+                        });
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

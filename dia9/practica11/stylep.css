@@ -1,0 +1,21 @@
+#productos{
+    border-collapse: collapse;
+    width:100%;
+}
+
+#productos th{
+    background-color: rgb(255, 213, 159);
+    color:black;
+    padding: 8px;
+    text-align: center;
+}
+
+#productos td{
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+#productos tr:nth-child(even){
+    background-color: brown;
+}

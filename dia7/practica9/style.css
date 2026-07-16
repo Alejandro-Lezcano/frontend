@@ -1,0 +1,21 @@
+.left{
+    width: 50%;
+    height: 200px;
+    background-color: rgb(255, 179, 0);
+    float: left;
+}
+.right{
+    margin-left:50%;
+    width: 50%;
+    height: 200px;
+    background-color: rgb(49, 105, 247);
+    
+}
+
+@media(max-width : 600px){
+    .left, .right{
+        float: none;
+        width: 100%;
+        margin:0;
+    }
+}

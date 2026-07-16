@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Preuba de jQuery</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <script src="">"https://code.jquery.com/jquery-3.7.1.min.js"</script>
+        <script>
+            $(document).ready(function(){
+                $(".mini-img").on("mouseenter", function(){
+                    var nuevaSrc = $(this).attr("src");
+                    $(".img-visor").attr("src", nuevaSrc);            
+                })
+            })
+    </script>
+    </head>
+    <body>
+        <img scr="imagenes/img1.jpg" class="mini-img">
+        <img scr="imagenes/img2.jpg" class="mini-img">
+        <img scr="imagenes/img3.jpg" class="mini-img">
+
+        <div id="visor">
+            <img src="imagenes/img3.jpg" class="img-visor">
+        </div>
+    </body>
+</html>
